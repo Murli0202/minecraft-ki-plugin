@@ -1,0 +1,39 @@
+# ═══════════════════════════════════════════
+#   KI-Plugin Konfiguration
+# ═══════════════════════════════════════════
+
+# Befehl mit dem Spieler die KI ansprechen
+# Beispiel: "!ki Was ist ein Creeper?"
+befehl: "!ki"
+
+# Ollama Modell das genutzt werden soll
+# Installierte Modelle anzeigen: ollama list
+# Empfehlungen: mistral, llama3:8b, phi3:mini, tinyllama
+modell: "mistral"
+
+# Ollama API URL (normalerweise nicht ändern)
+ollama-url: "http://localhost:11434/api/generate"
+
+# Anweisung die vor jeder Frage an die KI gesendet wird
+# Hier kannst du Sprache, Länge und Verhalten steuern
+prompt-prefix: "Antworte kurz auf Deutsch, maximal 2 Saetze: "
+
+# Präfix der vor der KI-Antwort im Chat erscheint
+# §b = Hellblau, §f = Weiß, §a = Grün usw.
+chat-prefix: "§b[KI] §f"
+
+# Nachricht die erscheint während die KI nachdenkt
+warte-meldung: "§7Einen Moment..."
+
+# Nachricht wenn jemand !ki ohne Frage schreibt
+hilfe-meldung: "Beispiel: !ki Was ist ein Creeper?"
+
+# Nachricht bei einem Fehler
+fehler-meldung: "§cFehler beim Abrufen der KI."
+
+# Maximale Wartezeit auf Ollama-Antwort in Sekunden
+timeout-sekunden: 60
+
+# true  = Nur der Fragesteller sieht die Antwort
+# false = Alle Spieler sehen die Antwort
+nur-anfrager-sieht-antwort: false
