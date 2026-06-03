@@ -76,9 +76,9 @@ ollama pull mistral
 
 ## 📋 Minecraft Version
 
-Getestet mit Paper **1.21.1**. Für andere Versionen `pom.xml` anpassen:
+Getestet mit Paper **26.1.2**. Für andere Versionen `pom.xml` anpassen:
 ```xml
-<version>1.21.1-R0.1-SNAPSHOT</version>
+<version>26.1.2-R0.1-SNAPSHOT</version>
 ```
 
 ---
