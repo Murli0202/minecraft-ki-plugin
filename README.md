@@ -1,4 +1,4 @@
-# 🤖 Minecraft KI-Plugin (Ollama + Paper)
+# 🤖 Minecraft KI-Plugin (Ollama + Paper) (This plugin is all made by ai)
 
 Ein Paper-Plugin das eine lokale KI (via Ollama) direkt in den Minecraft-Chat integriert. Kein Bot-Spieler, kein extra Account – läuft unsichtbar im Hintergrund.
 
