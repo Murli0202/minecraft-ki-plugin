@@ -1,0 +1,17 @@
+name: KiPlugin
+version: 1.0
+main: de.kibot.KiPlugin
+api-version: 26.1
+description: KI-Assistent im Chat via Ollama
+author: YourName
+
+commands:
+  kireload:
+    description: Lädt die KI-Plugin Config neu
+    usage: /kireload
+    permission: kiplugin.reload
+
+permissions:
+  kiplugin.reload:
+    description: Erlaubt das Neuladen der Config
+    default: op
