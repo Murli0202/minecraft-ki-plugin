@@ -37,3 +37,19 @@ timeout-sekunden: 60
 # true  = Nur der Fragesteller sieht die Antwort
 # false = Alle Spieler sehen die Antwort
 nur-anfrager-sieht-antwort: false
+
+# ═══════════════════════════════════════════
+#   Nachrichten-Limit (NEU!)
+# ═══════════════════════════════════════════
+
+# Maximale Anzahl von AI-Fragen pro Stunde für normale Spieler
+# Das Limit setzt sich jede Stunde zurück
+message-limit: 5
+
+# Spielernamen die unbegrenzte Nachrichten haben
+# Beispiel:
+#   unlimited-players:
+#     - "Steve"
+#     - "Alex"
+#     - "Admin123"
+unlimited-players: []
