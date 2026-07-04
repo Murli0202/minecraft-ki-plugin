@@ -2,8 +2,12 @@ package de.kibot;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Cow;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -44,7 +48,12 @@ public class KiPlugin extends JavaPlugin implements Listener {
     private String getFehlerMeldung() { return getConfig().getString("fehler-meldung", "§cFehler beim Abrufen der KI."); }
     private int    getTimeout()       { return getConfig().getInt("timeout-sekunden", 60) * 1000; }
     private boolean nurAnfrager()     { return getConfig().getBoolean("nur-anfrager-sieht-antwort", false); }
-    // ───────────────────────────────────────────────────────────────────────
+    
+    // Cow Protection Feature
+    private boolean isCowProtectionEnabled() { return getConfig().getBoolean("cow-protection.enabled", true); }
+    private String getCowKickMessage() { return getConfig().getString("cow-protection.kick-message", "§cDon't kill cows on this server"); }
+    private String getCowDeathMessage() { return getConfig().getString("cow-protection.death-message", "§e[Cow Protection] §fA cow has died!"); }
+    // ───────────────────────────────────────────────────────────────[...]
 
     // ── Update-Check ───────────────────────────────────────────────────────
     private void pruefeAufUpdates() {
@@ -87,7 +96,7 @@ public class KiPlugin extends JavaPlugin implements Listener {
             getLogger().warning("[Update] Update-Check fehlgeschlagen: " + e.getMessage());
         }
     }
-    // ───────────────────────────────────────────────────────────────────────
+    // ───────────────────────────────────────────────────────────────[...]
 
     // ── Spieler-Join: Update-Hinweis für OPs ──────────────────────────────
     @EventHandler
@@ -102,7 +111,31 @@ public class KiPlugin extends JavaPlugin implements Listener {
             event.getPlayer().sendMessage("§7Download: §bhttps://github.com/DEIN-NAME/minecraft-ki-plugin/releases/latest");
         }, 40L); // 2 Sekunden nach dem Joinen
     }
-    // ───────────────────────────────────────────────────────────────────────
+    // ──────────────────────────────────────────────────────────────[...]
+
+    // ── Cow Protection Feature ──────────────────────────────────────────────
+    @EventHandler
+    public void onCowDeath(EntityDeathEvent event) {
+        if (!isCowProtectionEnabled()) return;
+        
+        Entity entity = event.getEntity();
+        
+        // Check if the entity is a cow
+        if (!(entity instanceof Cow)) return;
+        
+        // Get the player who killed the cow
+        Player killer = entity.getKiller();
+        
+        if (killer != null) {
+            // Kick the player who killed the cow
+            killer.kickPlayer(getCowKickMessage());
+            getLogger().info("[Cow Protection] Player " + killer.getName() + " was kicked for killing a cow");
+        }
+        
+        // Broadcast message to all players that a cow has died
+        getServer().broadcastMessage(getCowDeathMessage());
+    }
+    // ──────────────────────────────────────────────────────────────[...]
 
     @EventHandler
     public void onChat(AsyncPlayerChatEvent event) {
