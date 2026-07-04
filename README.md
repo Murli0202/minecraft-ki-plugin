@@ -35,6 +35,8 @@ cp target/ki-plugin-1.0.jar /path/to/server/plugins/
 
 ## 🚀 Usage
 
+### AI Chat Commands
+
 Simply type in the Minecraft chat:
 ```
 !ki What is a Creeper?
@@ -64,6 +66,36 @@ Other models: `llama3:8b`, `phi3:mini`, `tinyllama`
 Reload config without restarting the server:
 ```
 /kireload
+```
+
+---
+
+## 🐄 Cow Protection Feature
+
+Protect your cows from being killed! This feature automatically kicks players who kill cows and notifies all players when a cow dies.
+
+### Configuration
+
+```yml
+cow-protection:
+  enabled: true                              # Enable/disable the feature (default: true)
+  kick-message: "§cDon't kill cows on this server"   # Message shown to kicked players
+  death-message: "§e[Cow Protection] §fA cow has died!"  # Message broadcast to all players
+```
+
+### Behavior
+
+- **When a player kills a cow**: The player is immediately kicked with the configured message
+- **When a cow dies** (any cause): All players receive a notification in chat
+- **Customizable**: All messages can be modified in the config
+- **Disableable**: Set `enabled: false` to turn off the feature
+
+### Example
+
+```
+Player kills a cow
+└─ Player is kicked: "Don't kill cows on this server"
+└─ All players see: "[Cow Protection] A cow has died!"
 ```
 
 ---
