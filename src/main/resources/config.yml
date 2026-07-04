@@ -53,3 +53,18 @@ message-limit: 5
 #     - "Alex"
 #     - "Admin123"
 unlimited-players: []
+
+# ═══════════════════════════════════════════
+#   Cow Protection Feature
+# ═══════════════════════════════════════════
+
+cow-protection:
+  # true  = Cow protection is enabled
+  # false = Cow protection is disabled
+  enabled: true
+  
+  # Message sent to the player when they are kicked for killing a cow
+  kick-message: "§cDon't kill cows on this server"
+  
+  # Message broadcast to all players when a cow dies
+  death-message: "§e[Cow Protection] §fA cow has died!"
