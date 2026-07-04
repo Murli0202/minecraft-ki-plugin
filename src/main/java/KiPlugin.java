@@ -4,6 +4,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Cow;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -123,8 +124,11 @@ public class KiPlugin extends JavaPlugin implements Listener {
         // Check if the entity is a cow
         if (!(entity instanceof Cow)) return;
         
+        // Cow is a LivingEntity, cast it
+        LivingEntity cow = (LivingEntity) entity;
+        
         // Get the player who killed the cow
-        Player killer = entity.getKiller();
+        Player killer = cow.getKiller();
         
         if (killer != null) {
             // Kick the player who killed the cow
