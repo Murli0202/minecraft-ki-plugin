@@ -1,6 +1,6 @@
 # 🤖 Minecraft AI Plugin (Ollama + External AI APIs + Paper)
 
-A Paper plugin that integrates AI directly into the Minecraft chat. Choose between running a **local AI with Ollama** or connecting to **external AI services** like OpenAI, Anthropic, Cohere, and others. No bot player, no extra account – runs invisibly in the background.
+A Paper plugin that integrates AI directly into the Minecraft chat. Choose between running a **local AI with Ollama** or connecting to **external AI services** like OpenAI, Anthropic, Cohere, and others.
 
 ---
 
@@ -100,7 +100,7 @@ Choose your provider and get an API key:
   - **`claude-3-opus`** - Earlier generation, still excellent
 
 #### **Cohere (2026 Updates)**
-- Sign up at: https://dashboard.cohere.com/
+- Sign up at: https://dashboard.cohere.ai/
 - Get API key from dashboard
 - **Latest Models:**
   - **`command-r-plus`** - Enterprise-grade model
@@ -116,7 +116,7 @@ Choose your provider and get an API key:
   - **`gemini-2.0`** - Earlier version, still capable
 
 #### **xAI Grok (July 2026)**
-- Sign up at: https://grok.ai.com/
+- Sign up at: https://grok.com/
 - **Latest Model:**
   - **`grok-4.5`** - Competitive reasoning and coding abilities
 
