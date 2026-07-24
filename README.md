@@ -1,6 +1,6 @@
 # 🤖 Minecraft AI Plugin (Ollama + External AI APIs + Paper)
 
-A Paper plugin that integrates AI directly into the Minecraft chat. Choose between running a **local AI with Ollama** or connecting to **external AI services** like OpenAI, Anthropic, Cohere, and HuggingFace. No bot player, no extra account – runs invisibly in the background.
+A Paper plugin that integrates AI directly into the Minecraft chat. Choose between running a **local AI with Ollama** or connecting to **external AI services** like OpenAI, Anthropic, Cohere, and others. No bot player, no extra account – runs invisibly in the background.
 
 ---
 
@@ -9,7 +9,7 @@ A Paper plugin that integrates AI directly into the Minecraft chat. Choose betwe
 - Paper Server (26.1.x)
 - Java 25
 - **Option A (Local)**: [Ollama](https://ollama.com) running on the same server
-- **Option B (External)**: API key from an AI provider (OpenAI, Anthropic, Cohere, or HuggingFace)
+- **Option B (External)**: API key from an AI provider (OpenAI, Anthropic, Cohere, or others)
 
 For local Ollama:
 - Mistral model installed: `ollama pull mistral`
@@ -71,33 +71,54 @@ Reload config without restarting the server:
 
 ---
 
-## 🌐 Using External AI Services
+## 🌐 Using External AI Services (2026 Models)
 
-You can connect to external AI providers like **OpenAI**, **Anthropic**, **Cohere**, or **HuggingFace** instead of using Ollama.
+You can connect to external AI providers with cutting-edge 2026 models instead of using Ollama. All major AI companies have released new flagship models!
 
 ### Step 1: Get an API Key
 
 Choose your provider and get an API key:
 
-- **OpenAI (GPT-3.5, GPT-4)**
-  - Sign up at: https://platform.openai.com/signup
-  - Get API key: https://platform.openai.com/api-keys
-  - Recommended models: `gpt-3.5-turbo`, `gpt-4`, `gpt-4-turbo`
+#### **OpenAI (GPT-5.6 Family - July 2026)** 🔥
+- Sign up at: https://platform.openai.com/signup
+- Get API key: https://platform.openai.com/api-keys
+- **Latest Models (July 2026):**
+  - **`gpt-5.6-sol`** - Most capable, state-of-the-art for complex reasoning & generation
+  - **`gpt-5.6-terra`** - Balanced mid-tier, 50% cheaper than Sol, great performance
+  - **`gpt-5.6-luna`** - Fastest & most cost-effective, best for high-volume use
+  - **`gpt-5.5`** - Previous generation, still powerful
+  - **`gpt-4-turbo`** - Earlier model, lower cost
 
-- **Anthropic (Claude)**
-  - Sign up at: https://console.anthropic.com/
-  - Get API key: https://console.anthropic.com/account/keys
-  - Recommended models: `claude-3-opus`, `claude-3-sonnet`, `claude-3-haiku`
+#### **Anthropic / Claude (Latest 2026)** 🧠
+- Sign up at: https://console.anthropic.com/
+- Get API key: https://console.anthropic.com/account/keys
+- **Latest Models (June-July 2026):**
+  - **`claude-fable-5`** ⭐ - Safe, powerful variant for public/enterprise use (RECOMMENDED)
+  - **`claude-sonnet-5`** - Agentic, cost-effective, approaching Opus performance
+  - **`claude-opus-4.8`** - Top-tier reasoning & complex tasks
+  - **`claude-mythos-5`** - Frontier research model with lifted safeguards
+  - **`claude-3-opus`** - Earlier generation, still excellent
 
-- **Cohere**
-  - Sign up at: https://dashboard.cohere.com/
-  - Get API key from dashboard
-  - Recommended models: `command`, `command-light`
+#### **Cohere (2026 Updates)**
+- Sign up at: https://dashboard.cohere.com/
+- Get API key from dashboard
+- **Latest Models:**
+  - **`command-r-plus`** - Enterprise-grade model
+  - **`command-r`** - Fast and accurate
+  - **`command`** - Lightweight option
 
-- **HuggingFace**
-  - Sign up at: https://huggingface.co/join
-  - Get API key: https://huggingface.co/settings/tokens
-  - Use any model ID from HuggingFace Hub
+#### **Google Gemini (July 2026)**
+- Sign up at: https://ai.google.dev/
+- Get API key from Google AI Studio
+- **Latest Models:**
+  - **`gemini-3.5`** - Latest release with advanced multi-modal capabilities
+  - **`gemini-3.1`** - Strong reasoning and live translation support
+  - **`gemini-2.0`** - Earlier version, still capable
+
+#### **xAI Grok (July 2026)**
+- Sign up at: https://grok.xai.com/
+- **Latest Model:**
+  - **`grok-4.5`** - Competitive reasoning and coding abilities
 
 ### Step 2: Configure the Plugin
 
@@ -109,9 +130,9 @@ provider: "external"
 
 # Configure your API service
 external-ai:
-  service: "openai"                              # or "anthropic", "cohere", "huggingface"
+  service: "openai"                              # or "anthropic", "cohere", "gemini", "xai"
   api-key: "sk-xxxxx..."                         # Your API key (keep it secret!)
-  model: "gpt-3.5-turbo"                         # Model to use
+  model: "gpt-5.6-terra"                         # Model to use (see list above)
   api-endpoint: "https://api.openai.com/v1/chat/completions"  # Usually auto-detected
   max-tokens: 100                                # Max response length
   temperature: 0.7                               # 0.0=deterministic, 1.0=creative
@@ -124,21 +145,53 @@ external-ai:
 # Server restarts, plugin loads new config
 ```
 
-### Complete Example: OpenAI Setup
+### Complete Examples
 
+**Example 1: OpenAI GPT-5.6 (Best for complex reasoning)**
 ```yml
 provider: "external"
 
 external-ai:
   service: "openai"
   api-key: "sk-proj-xxxxxxxxxxxxx"
-  model: "gpt-3.5-turbo"
+  model: "gpt-5.6-sol"
   api-endpoint: "https://api.openai.com/v1/chat/completions"
   max-tokens: 100
   temperature: 0.7
 
 prompt-prefix: "Answer briefly in English, max 2 sentences: "
-chat-prefix: "§b[AI] §f"
+chat-prefix: "§b[AI-Sol] §f"
+```
+
+**Example 2: Claude Fable 5 (Recommended - Safe & Powerful)**
+```yml
+provider: "external"
+
+external-ai:
+  service: "anthropic"
+  api-key: "sk-ant-xxxxxxxxxxxxx"
+  model: "claude-fable-5"
+  api-endpoint: "https://api.anthropic.com/v1/messages"
+  max-tokens: 100
+  temperature: 0.7
+
+prompt-prefix: "Answer briefly in English, max 2 sentences: "
+chat-prefix: "§b[Claude] §f"
+```
+
+**Example 3: Budget Option (GPT-5.6 Luna)**
+```yml
+provider: "external"
+
+external-ai:
+  service: "openai"
+  api-key: "sk-proj-xxxxxxxxxxxxx"
+  model: "gpt-5.6-luna"  # Fastest & cheapest
+  max-tokens: 80         # Keep responses shorter to save costs
+  temperature: 0.5
+
+prompt-prefix: "Answer briefly: "
+chat-prefix: "§b[Luna] §f"
 ```
 
 ---
@@ -151,35 +204,44 @@ chat-prefix: "§b[AI] §f"
 - **Don't commit** it to GitHub (add to `.gitignore`)
 - **Use environment variables** if hosting on a remote server
 - Consider using a separate API key just for your Minecraft server
-- Rotate your API keys periodically
-- Monitor your API usage to avoid unexpected charges
+- **Rotate your API keys** periodically
+- **Monitor your API usage** to avoid unexpected charges
+- Keep API keys out of server backups
 
 ---
 
-## 💰 Cost Considerations
+## 💰 Cost Comparison (2026 Pricing)
 
-When using external AI services:
+When using external AI services, costs vary significantly:
 
-- **OpenAI**: Pay-per-use (GPT-3.5 is ~$0.0005 per message)
-- **Anthropic**: Pricing varies by model
-- **Cohere**: Free tier available, pay-per-use for more
-- **HuggingFace**: Free for many models, paid inference available
+| Model | Cost per 1K tokens | Speed | Quality | Best For |
+|-------|-------------------|-------|---------|----------|
+| GPT-5.6-Sol | ~$0.003 | Slower | ⭐⭐⭐⭐⭐ | Complex reasoning |
+| GPT-5.6-Terra | ~$0.0015 | Medium | ⭐⭐⭐⭐⭐ | Best balance |
+| GPT-5.6-Luna | ~$0.0003 | Fast | ⭐⭐⭐⭐ | Budget option |
+| Claude Fable-5 | ~$0.003 | Medium | ⭐⭐⭐⭐⭐ | Safe & powerful |
+| Claude Sonnet-5 | ~$0.003 | Fast | ⭐⭐⭐⭐ | Cost-effective |
+| Cohere Command-R | ~$0.0005 | Fast | ⭐⭐⭐ | Very budget |
 
-Tip: Set a lower `max-tokens` value to reduce costs and speed up responses!
+**Tip**: Set `max-tokens: 80` to reduce costs while keeping responses quick!
 
 ---
 
 ## 🌍 Ollama vs External Services
 
-| Feature | Ollama | OpenAI | Anthropic |
-|---------|--------|--------|-----------|
-| Cost | Free | Pay per use | Pay per use |
-| Privacy | 100% Local | API sent to servers | API sent to servers |
-| Speed | Depends on hardware | Fast (cloud) | Fast (cloud) |
-| Quality | Good | Excellent (GPT-4) | Excellent (Claude) |
-| Setup | Complex | Simple | Simple |
+| Feature | Ollama | OpenAI | Anthropic | Cohere |
+|---------|--------|--------|-----------|--------|
+| Cost | Free | Pay per use | Pay per use | Pay per use |
+| Privacy | 100% Local | Cloud-based | Cloud-based | Cloud-based |
+| Speed | Depends on hardware | ⚡⚡⚡ Fast | ⚡⚡⚡ Fast | ⚡⚡⚡ Fast |
+| Quality | Good | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐ |
+| Setup | Complex | Simple | Simple | Simple |
+| Latest Models | Slower updates | Always current | Always current | Regular updates |
 
-Choose **Ollama** for privacy and no costs, choose **External** for better quality and faster responses!
+**Choose Ollama if:** You want privacy, free usage, and don't mind slower setup  
+**Choose OpenAI:** You want the absolute best (GPT-5.6-Sol) and newest models  
+**Choose Claude Fable-5:** You want a safe, powerful, enterprise-ready model  
+**Choose Cohere:** You're on a tight budget and just need basic responses  
 
 ---
 
@@ -244,16 +306,26 @@ MIT – do whatever you want with it!
 ## 🆘 Troubleshooting
 
 ### External API not working?
-- Check your API key is correct
-- Verify the service is online
-- Check firewall allows HTTPS connections
-- Look at server logs for error messages
+- Check your API key is correct and active
+- Verify the service is online and accessible
+- Check firewall allows HTTPS connections (port 443)
+- Look at server logs for detailed error messages
+- Ensure you have API credits/balance remaining
 
 ### Ollama not responding?
 - Ensure Ollama is running: `ollama serve`
 - Check the model is downloaded: `ollama list`
 - Verify URL is correct: `http://localhost:11434`
+- Check firewall allows localhost connections
+
+### API charges too high?
+- Switch to GPT-5.6-Luna or Claude Sonnet-5 (cheaper)
+- Reduce `max-tokens` value (saves money per query)
+- Set `message-limit` to restrict usage per player
+- Use `Cohere` for budget-friendly option
 
 ---
 
-**Need help?** Open an issue on GitHub!
+**Need help?** Open an issue on GitHub!  
+**Want to support local AI?** Stick with Ollama!  
+**Want cutting-edge AI in Minecraft?** Use GPT-5.6 or Claude Fable-5!
