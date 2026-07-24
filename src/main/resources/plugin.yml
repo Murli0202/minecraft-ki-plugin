@@ -3,7 +3,7 @@ version: 1.0
 main: de.kibot.KiPlugin
 api-version: 26.1
 description: KI-Assistent im Chat via Ollama
-author: YourName
+author: Murli0202
 
 commands:
   kireload:
