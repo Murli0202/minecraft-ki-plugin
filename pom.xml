@@ -7,7 +7,7 @@
 
   <groupId>de.kibot</groupId>
   <artifactId>ki-plugin</artifactId>
-  <version>1.5</version>
+  <version>1.6</version>
   <packaging>jar</packaging>
 
   <repositories>
@@ -21,7 +21,7 @@
     <dependency>
       <groupId>io.papermc.paper</groupId>
       <artifactId>paper-api</artifactId>
-      <version>[26.1.2.build,)</version>
+      <version>[26.2.build,)</version>
       <scope>provided</scope>
     </dependency>
   </dependencies>
