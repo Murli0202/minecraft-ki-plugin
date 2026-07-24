@@ -116,7 +116,7 @@ Choose your provider and get an API key:
   - **`gemini-2.0`** - Earlier version, still capable
 
 #### **xAI Grok (July 2026)**
-- Sign up at: https://grok.xai.com/
+- Sign up at: https://grok.ai.com/
 - **Latest Model:**
   - **`grok-4.5`** - Competitive reasoning and coding abilities
 
