@@ -88,7 +88,7 @@ public class KiPlugin extends JavaPlugin implements Listener {
             if (!neuesteVersion.equals(PLUGIN_VERSION)) {
                 updateVerfuegbar = true;
                 getLogger().info("[Update] Neue Version verfügbar: v" + neuesteVersion + " (aktuell: v" + PLUGIN_VERSION + ")");
-                getLogger().info("[Update] https://github.com/DEIN-NAME/minecraft-ki-plugin/releases/latest");
+                getLogger().info("[Update] https://github.com/Murli0202/minecraft-ki-plugin/releases/latest");
             } else {
                 getLogger().info("[Update] Plugin ist aktuell (v" + PLUGIN_VERSION + ")");
             }
