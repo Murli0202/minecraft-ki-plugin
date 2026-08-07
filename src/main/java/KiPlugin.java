@@ -97,7 +97,7 @@ public class KiPlugin extends JavaPlugin implements Listener {
             getLogger().warning("[Update] Update-Check fehlgeschlagen: " + e.getMessage());
         }
     }
-    // ───────────────────────────────────────────────────────────────[...]
+    // ──────────────────────────────────────────────────────────────��[...]
 
     // ── Spieler-Join: Update-Hinweis für OPs ──────────────────────────────
     @EventHandler
@@ -112,7 +112,7 @@ public class KiPlugin extends JavaPlugin implements Listener {
             event.getPlayer().sendMessage("§7Download: §bhttps://github.com/DEIN-NAME/minecraft-ki-plugin/releases/latest");
         }, 40L); // 2 Sekunden nach dem Joinen
     }
-    // ──────────────────────────────────────────────────────────────[...]
+    // ──────────────────────────────────────────────────────────────[.[...]
 
     // ── Cow Protection Feature ──────────────────────────────────────────────
     @EventHandler
@@ -139,7 +139,7 @@ public class KiPlugin extends JavaPlugin implements Listener {
         // Broadcast message to all players that a cow has died
         getServer().broadcastMessage(getCowDeathMessage());
     }
-    // ──────────────────────────────────────────────────────────────[...]
+    // ──────────────────────────────────────────────────────────────[.[...]
 
     @EventHandler
     public void onChat(AsyncPlayerChatEvent event) {
@@ -152,11 +152,45 @@ public class KiPlugin extends JavaPlugin implements Listener {
             return;
         }
 
+        // Allow overriding the local AI server for this single query by using the syntax:
+        // !ki@host:port question  (e.g. !ki@127.0.0.1:11434 Was ist ein Creeper?)
+        String overrideUrl = null;
+        if (frage.startsWith("@")) {
+            int space = frage.indexOf(' ');
+            String hostPart;
+            String rest = "";
+            if (space > 0) {
+                hostPart = frage.substring(1, space).trim();
+                rest = frage.substring(space).trim();
+            } else {
+                hostPart = frage.substring(1).trim();
+            }
+
+            if (hostPart.isEmpty()) {
+                event.getPlayer().sendMessage("§e" + getHilfeMeldung());
+                return;
+            }
+
+            // Build URL: add http:// if missing and ensure /api/generate path
+            if (!hostPart.startsWith("http://") && !hostPart.startsWith("https://")) {
+                hostPart = "http://" + hostPart;
+            }
+            if (!hostPart.endsWith("/api/generate")) {
+                // remove trailing slash if present to avoid double slashes
+                if (hostPart.endsWith("/")) hostPart = hostPart.substring(0, hostPart.length()-1);
+                hostPart = hostPart + "/api/generate";
+            }
+            overrideUrl = hostPart;
+            if (!rest.isEmpty()) frage = rest; // the actual question
+        }
+
         event.getPlayer().sendMessage(getWarteMeldung());
 
+        String fragenFinal = frage;
+        String finalOverrideUrl = overrideUrl;
         getServer().getScheduler().runTaskAsynchronously(this, () -> {
             try {
-                String antwort = frageOllama(frage);
+                String antwort = frageOllama(fragenFinal, finalOverrideUrl);
                 getServer().getScheduler().runTask(this, () -> {
                     if (nurAnfrager()) {
                         event.getPlayer().sendMessage(getChatPrefix() + antwort);
@@ -188,13 +222,15 @@ public class KiPlugin extends JavaPlugin implements Listener {
         return false;
     }
 
-    private String frageOllama(String frage) throws Exception {
+    private String frageOllama(String frage, String overrideOllamaUrl) throws Exception {
+        String targetUrl = (overrideOllamaUrl != null && !overrideOllamaUrl.isEmpty()) ? overrideOllamaUrl : getOllamaUrl();
+
         String body = "{\"model\":\"" + getModell() + "\"," +
                       "\"prompt\":\"" + getPromptPrefix() +
                       frage.replace("\"", "'") + "\"," +
                       "\"stream\":false}";
 
-        HttpURLConnection con = (HttpURLConnection) new URL(getOllamaUrl()).openConnection();
+        HttpURLConnection con = (HttpURLConnection) new URL(targetUrl).openConnection();
         con.setRequestMethod("POST");
         con.setRequestProperty("Content-Type", "application/json");
         con.setDoOutput(true);
