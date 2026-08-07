@@ -52,7 +52,7 @@ The AI responds directly in the chat, visible to all players.
 
 ## ⚙️ Configuration
 
-Everything can be changed in the `config.yml` file inside `plugins/KiPlugin/` after the first start.
+Everything can be changed in the `config.yml` file inside `plugins/KiPlugin/` after the first start. The plugin ships a default `config.yml` in its resources (`src/main/resources/config.yml`) so the file is created on first run — edit that file or the copy in `plugins/KiPlugin/`.
 
 ### Quick Setup
 
@@ -60,6 +60,7 @@ Everything can be changed in the `config.yml` file inside `plugins/KiPlugin/` af
 befehl: "!ki"            # Command to trigger the AI
 provider: "ollama"       # Use "ollama" or "external"
 modell: "mistral"        # Ollama model to use
+ollama-url: "http://localhost:11434/api/generate"  # Default local AI server (used if no per-query override)
 chat-prefix: "§b[AI] §f"
 nur-anfrager-sieht-antwort: false  # true = only the asker sees the reply
 ```
@@ -68,6 +69,26 @@ Reload config without restarting the server:
 ```
 /kireload
 ```
+
+---
+
+### Per-query local AI override (new)
+
+You can override the configured local AI server for a single query directly from the chat.
+
+Syntax:
+- `!ki@host:port your question here`
+
+Examples:
+- `!ki@127.0.0.1:11434 Was ist ein Creeper?`
+- `!ki@192.168.1.5:11434 Erkläre Redstone`
+
+Notes:
+- If you omit the `http://` prefix it will be added automatically.
+- The plugin will append `/api/generate` if the path is missing.
+- This override only applies to that single query and does not change the saved configuration.
+- If you need HTTPS, include the `https://` prefix: `!ki@https://example.com:11434 Frage`.
+- Be careful with exposing endpoints; do not use untrusted hosts.
 
 ---
 
@@ -241,7 +262,7 @@ When using external AI services, costs vary significantly:
 **Choose Ollama if:** You want privacy, free usage, and don't mind slower setup  
 **Choose OpenAI:** You want the absolute best (GPT-5.6-Sol) and newest models  
 **Choose Claude Fable-5:** You want a safe, powerful, enterprise-ready model  
-**Choose Cohere:** You're on a tight budget and just need basic responses  
+**Choose Cohere:** You're on a tight budget and just need basic responses
 
 ---
 
@@ -317,6 +338,7 @@ MIT – do whatever you want with it!
 - Check the model is downloaded: `ollama list`
 - Verify URL is correct: `http://localhost:11434`
 - Check firewall allows localhost connections
+- If using the per-query override, ensure the host you typed is reachable from the server
 
 ### API charges too high?
 - Switch to GPT-5.6-Luna or Claude Sonnet-5 (cheaper)
