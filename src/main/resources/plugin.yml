@@ -11,7 +11,16 @@ commands:
     usage: /kireload
     permission: kiplugin.reload
 
+  setaiserver:
+    description: Setzt die lokale AI-Server URL (persistiert in config)
+    usage: /setaiserver <url>
+    permission: kiplugin.setaiserver
+
 permissions:
   kiplugin.reload:
     description: Erlaubt das Neuladen der Config
+    default: op
+
+  kiplugin.setaiserver:
+    description: Erlaubt das Ändern der lokalen AI-Server URL
     default: op
